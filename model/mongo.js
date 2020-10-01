@@ -4,8 +4,15 @@ mongoose.connect('mongodb://localhost:27017/demoDb');
 var mongoSchema = mongoose.Schema;
 // create schema
 var userSchema = {
-    "userEmail": String,
-    "userPassword": String
+    "userEmail": {type:String,
+        require:true,
+        unique: true, 
+        match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+        //validation for emailId format
+    },
+    "userPassword": {
+        require:true
+    }
 };
 // create model if not exists.
 module.exports = mongoose.model('userLogin', userSchema);
